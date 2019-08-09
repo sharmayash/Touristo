@@ -1,0 +1,106 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tourist</title>
+
+    <!-- css imports -->
+    <!-- <link rel="shortcut icon" href="img/icon.ico" /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/app.css" />
+
+    <!-- js imports -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </head>
+  <body class="blue-grey lighten-4 container-fluid">
+    <!-- top Navbar -->
+
+    <header class="navbar-fixed">
+      <nav class="z-depth-3">
+        <div class="nav-wrapper blue-grey darken-4">
+          <a
+            href="#"
+            class="brand-logo left grey-text text-lighten-1"
+            style="margin-left: 80px;"
+            >Touristo</a
+          >
+          <a href="#" class="right" style="padding-right: 5%"
+            ><i class="material-icons blue-text">account_circle</i></a
+          >
+          <ul id="nav-mobile" class="left">
+            <li>
+              <a href="#" data-target="mobile-demo" class="sidenav-trigger"
+                ><i class="material-icons -text">menu</i></a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Side Nav -->
+
+    <ul
+      class="sidenav sidenav-fixed z-depth-0 blue-grey darken-4"
+      id="mobile-demo"
+    >
+      <li id="account_btn">
+        <a href="/">
+          <i class="material-icons green-text">chrome_reader_mode</i
+          ><span class="grey-text">Duty Slip</span></a
+        >
+      </li>
+      <li id="all_account">
+        <a href="/">
+          <i class="material-icons yellow-text text-darken-2">web</i>
+          <span class="grey-text">Total Slip</span></a
+        >
+      </li>
+      <li><div class="divider grey darken-2"></div></li>
+      <li>
+        <a href="/"
+          ><i class="material-icons orange-text text-darken-2">view_list</i>
+          <span class="grey-text">Bill Records</span></a
+        >
+      </li>
+      <li>
+        <a href="/"
+          ><i class="material-icons orange-text text-darken-2">view_list</i>
+          <span class="grey-text">Due Records</span></a
+        >
+      </li>
+      <li>
+        <a href="/"
+          ><i class="material-icons orange-text text-darken-2">view_list</i>
+          <span class="grey-text">Paid Records</span></a
+        >
+      </li>
+      <li><div class="divider grey darken-2"></div></li>
+      <li>
+        <a href="/addCompany"
+          ><i class="material-icons blue-text text-darken-2">store</i>
+          <span class="grey-text">Add Company</span></a
+        >
+      </li>
+      <li>
+        <a href="/addDriver"
+          ><i class="material-icons yellow-text text-darken-2">person_add</i>
+          <span class="grey-text">Add Driver</span></a
+        >
+      </li>
+      <li>
+        <a href="/addTransport"
+          ><i class="material-icons orange-text text-darken-2">local_taxi</i>
+          <span class="grey-text">Add Transport</span></a
+        >
+      </li>
+    </ul>

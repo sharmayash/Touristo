@@ -1,0 +1,19 @@
+main {
+  padding-left: 260px;
+}
+
+.sidenav {
+  margin-top: 64px;
+  max-width: 240px;
+}
+
+@media only screen and (max-width: 992px) {
+  main,
+  header {
+    padding-left: 0px;
+  }
+  .sidenav {
+    margin-top: 0px;
+    max-width: 240px;
+  }
+}

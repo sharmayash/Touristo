@@ -1,0 +1,217 @@
+<% include includes/header %>
+
+<main>
+  <div class="row">
+    <div class="col s12">
+      <form
+        action="/newBooking"
+        method="POST"
+        class="card-panel blue-grey lighten-5 center z-depth-5"
+      >
+        <h5>Tourist Registration</h5>
+        <div class="row">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">account_circle</i>
+            <input id="name" name="name" type="text" class="validate" />
+            <label for="name">Customer Name</label>
+          </div>
+          <div class="input-field col s6">
+            <i class="material-icons prefix">phone</i>
+            <input id="con_num" name="customerNo" type="number" class="validate" />
+            <label for="con_num">Contact Number</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">add_location</i>
+            <input id="address" name="address" type="text" class="validate" />
+            <label for="address">Reporting Address</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">description</i>
+            <input id="details" name="details" type="text" class="validate" />
+            <label for="details">Enter Trip Details</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">account_box</i>
+            <input id="bookie" name="bookie" type="text" class="validate" />
+            <label for="bookie">Vehicle Booked By</label>
+          </div>
+          <div class="input-field col s6">
+            <i class="material-icons prefix">phone</i>
+            <input
+              id="con_num_bookie"
+              name="bookiePhNo"
+              type="number"
+              class="validate"
+            />
+            <label for="con_num_bookie">Contact Number</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m6 l6">
+            <select name="driverName">
+              <option value="" disabled selected>Select Driver Name</option>
+              <% if(locals.allDrivers) { %>
+                <% allDrivers.map(driver => { %>
+                  <option value="<%= driver.name %> (Phone :: <%= driver.contactNo %>)">
+                    <%= driver.name %> (Phone :: <%= driver.contactNo %>)
+                  </option>
+                <% }) %>
+              <% } %>
+            </select>
+          </div>
+          <div class="input-field col s12 m6 l6">
+            <select name="vehicleName">
+              <option value="" disabled selected>Select Vehicle Name</option>
+              <% if(locals.allVehicles) { %>
+                <% allVehicles.map(vehicle => { %>
+                  <option value="<%= vehicle.name %> (<%= vehicle.vehicleType %>)">
+                    <%= vehicle.name %> (<%= vehicle.vehicleType %>)
+                  </option>
+                <% }) %>
+              <% } %>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m3 l3">
+            <i class="material-icons prefix">confirmation_number</i>
+            <input id="rate" name="rate" type="number" class="validate" />
+            <label for="rate">Rate Hr./ Km</label>
+          </div>
+          <div class="input-field col s12 m3 l3">
+            <i class="material-icons prefix">timer</i>
+            <input
+              id="meter_reading1"
+              name="meterReading1"
+              type="number"
+              class="validate"
+            />
+            <label for="meter_reading1">Opening Meter Reading</label>
+          </div>
+          <div class="input-field col s12 m3 l3">
+            <i class="material-icons prefix">timer</i>
+            <input
+              id="meter_reading2"
+              name="meterReading2"
+              type="number"
+              class="validate"
+            />
+            <label for="meter_reading2">Closing Meter Reading</label>
+          </div>
+          <div class="input-field col s12 m3 l3">
+            <i class="material-icons prefix">access_time</i>
+            <input
+              id="total_reading"
+              name="totalReading"
+              type="number"
+              class="validate"
+            />
+            <label for="total_reading">Total Reading</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m6 l6">
+            <label>Departure</label>
+            <div class="row">
+              <div class="input-field col s6">
+                <i class="material-icons prefix">date_range</i>
+                <input
+                  id="departure_date"
+                  name="departureDate"
+                  type="text"
+                  class="datepicker"
+                />
+                <label for="departure_date">Date</label>
+              </div>
+              <div class="input-field col s6">
+                <i class="material-icons prefix">access_time</i>
+                <input
+                  id="departure_time"
+                  name="departureTime"
+                  type="text"
+                  class="timepicker"
+                />
+                <label for="departure_time">Time</label>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l6">
+            <label>Arrival</label>
+            <div class="row">
+              <div class="input-field col s6">
+                <i class="material-icons prefix">date_range</i>
+                <input
+                  id="arrival_date"
+                  name="arrivalDate"
+                  type="text"
+                  class="datepicker"
+                />
+                <label for="arrival_date">Date</label>
+              </div>
+              <div class="input-field col s6">
+                <i class="material-icons prefix">access_time</i>
+                <input
+                  id="arrival_time"
+                  name="arrivalTime"
+                  type="text"
+                  class="timepicker"
+                />
+                <label for="arrival_time">Time</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix">wb_sunny</i>
+            <input id="days" name="days" type="number" class="validate" />
+            <label for="days">Days</label>
+          </div>
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix">brightness_3</i>
+            <input id="night" name="night" type="number" class="validate" />
+            <label for="night">Night</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m4 l4">
+            <i class="material-icons prefix">account_balance_wallet</i>
+            <input
+              id="total_amount"
+              name="totalAmount"
+              type="number"
+              class="validate"
+            />
+            <label for="total_amount">Total Package Amount</label>
+          </div>
+          <div class="input-field col s12 m4 l4">
+            <i class="material-icons prefix">account_balance_wallet</i>
+            <input id="Advance" name="advance" type="number" class="validate" />
+            <label for="Advance">Advance Amount</label>
+          </div>
+          <div class="input-field col s12 m4 l4">
+            <i class="material-icons prefix">account_balance_wallet</i>
+            <input id="Balance" name="balance" type="number" class="validate" />
+            <label for="Balance">Balance Amount</label>
+          </div>
+        </div>
+        <button
+          class="btn blue-grey darken-4 waves-effect waves-light"
+          type="submit"
+          name="action"
+        >
+          Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<% include includes/footer %>
