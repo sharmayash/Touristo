@@ -88,6 +88,13 @@ app.get("/addTransport", (req, res) => {
   });
 });
 
+app.get("/allBookings", (req, res) => {
+  Booking.find({}, (err, bookings) => {
+    if (err) console.log(err);
+    
+    res.render("allBookings", { bookings: bookings });
+  });
+});
 // ---------- post routes---------
 
 app.post("/newBooking", (req, res) => {
