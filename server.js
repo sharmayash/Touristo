@@ -268,8 +268,8 @@ app.post("/addVehicle", (req, res) => {
   });
 });
 
-app.listen(1200 || process.env.PORT, err => {
-  if (err) res.send(err);
+const port = process.env.PORT || 1200;
 
-  console.log("Server Started on PORT 1200");
+app.listen(port, () => {
+  console.log("server started on 1200");
 });
