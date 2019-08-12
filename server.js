@@ -11,18 +11,20 @@ app.set("view engine", "ejs");
 app.set("views", __dirname + "/views/");
 
 app.use(express.static(__dirname + "/public"));
-app.use(express.static(__dirname + "/uploads"));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-mongoose.connect("mongodb://localhost/tourist", { useNewUrlParser: true });
+mongoose.connect(
+  "mongodb+srv://yash1:yash1234@cluster0-scoen.mongodb.net/test?retryWrites=true&w=majority",
+  { useNewUrlParser: true }
+);
 
 // ---- multer specs -----
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./uploads/");
+    cb(null, "./public/uploads/");
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
@@ -72,29 +74,43 @@ app.get("/", (req, res) => {
 });
 
 app.get("/addCompany", (req, res) => {
-  res.render("addCompany");
+  Company.find({}, (err, companies) => {
+    if (err) console.log(err);
+
+    res.render("addCompany", { companies: companies });
+  });
 });
 
 app.get("/addDriver", (req, res) => {
-  res.render("addDriver");
+  Driver.find({}, (err, drivers) => {
+    if (err) console.log(err);
+
+    res.render("addDriver", { drivers: drivers });
+  });
 });
 
 app.get("/addTransport", (req, res) => {
-  Transport.find({}, (err, vehicles) => {
+  Transport.find({}, (err, transports) => {
     if (err) console.log(err);
+    Vehicle.find({}, (err, vehicles) => {
+      if (err) console.log(err);
 
-    if (vehicles) res.render("addTransport", { vehicleType: vehicles });
-    else res.render("addTransport", { vehicleType: [] });
+      res.render("addTransport", {
+        transports: transports,
+        vehicles: vehicles
+      });
+    });
   });
 });
 
 app.get("/allBookings", (req, res) => {
   Booking.find({}, (err, bookings) => {
     if (err) console.log(err);
-    
+
     res.render("allBookings", { bookings: bookings });
   });
 });
+
 // ---------- post routes---------
 
 app.post("/newBooking", (req, res) => {
@@ -170,13 +186,17 @@ app.post("/addCompany", upload.single("logo"), (req, res) => {
     email,
     contactNo: phone,
     gstin: gst,
-    logo: req.file.path
+    logo: req.file.path.slice(6)
   };
 
   Company.create(newCompany, (err, newCompany) => {
     if (err) console.log(err);
 
-    res.render("addCompany");
+    Company.find({}, (err, companies) => {
+      if (err) console.log(err);
+
+      res.render("addCompany", { companies: companies });
+    });
   });
 });
 
@@ -194,7 +214,11 @@ app.post("/addDriver", (req, res) => {
   Driver.create(newDriver, (err, newDriver) => {
     if (err) console.log(err);
 
-    res.render("addDriver");
+    Driver.find({}, (err, drivers) => {
+      if (err) console.log(err);
+
+      res.render("addDriver", { drivers: drivers });
+    });
   });
 });
 
@@ -204,11 +228,16 @@ app.post("/addTransport", (req, res) => {
   Transport.create({ transportName: transport }, (err, newTransport) => {
     if (err) console.log(err);
 
-    Transport.find({}, (err, vehicles) => {
+    Transport.find({}, (err, transports) => {
       if (err) console.log(err);
+      Vehicle.find({}, (err, vehicles) => {
+        if (err) console.log(err);
 
-      if (vehicles) res.render("addTransport", { vehicleType: vehicles });
-      else res.render("addTransport", { vehicleType: [] });
+        res.render("addTransport", {
+          transports: transports,
+          vehicles: vehicles
+        });
+      });
     });
   });
 });
@@ -225,10 +254,16 @@ app.post("/addVehicle", (req, res) => {
   Vehicle.create(newVehicle, (err, newVehicle) => {
     if (err) console.log(err);
 
-    Transport.find({}, (err, vehicles) => {
+    Transport.find({}, (err, transports) => {
       if (err) console.log(err);
+      Vehicle.find({}, (err, vehicles) => {
+        if (err) console.log(err);
 
-      res.render("addTransport", { vehicleType: vehicles });
+        res.render("addTransport", {
+          transports: transports,
+          vehicles: vehicles
+        });
+      });
     });
   });
 });

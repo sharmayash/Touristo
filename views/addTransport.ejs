@@ -26,7 +26,10 @@
         </button>
       </form>
       <div style="padding: 10%">
-        <button class="btn blue-grey darken-4 waves-effect waves-light">
+        <button
+          data-target="modal1"
+          class="btn btn-small modal-trigger blue-grey darken-4 waves-effect waves-light"
+        >
           View All Transport
         </button>
       </div>
@@ -42,13 +45,11 @@
           <div class="input-field col s12">
             <select name="vehicleType">
               <option value="" disabled selected>Select Vehicle Type</option>
-              <% if(locals.vehicleType) { %>
-                <% vehicleType.map(vehicle => { %>
-                  <option value="<%= vehicle.transportName %>">
-                    <%= vehicle.transportName %>
-                  </option>
-                <% }) %>
-              <% } %>
+              <% if(locals.transports) { %> <% transports.map(transport => { %>
+              <option value="<%= transport.transportName %>">
+                <%= transport.transportName %>
+              </option>
+              <% }) %> <% } %>
             </select>
           </div>
           <div class="input-field col s12">
@@ -71,12 +72,44 @@
         </button>
       </form>
       <div style="padding: 10%">
-        <button class="btn blue-grey darken-4 waves-effect waves-light">
+        <button">
+        <button
+          data-target="modal2"
+          class="btn btn-small modal-trigger blue-grey darken-4 waves-effect waves-light"
+        >
           View All Vehicle
         </button>
       </div>
     </div>
   </div>
 </main>
+
+<div id="modal1" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4>Transports :-</h4>
+    <% if (locals.transports) { %> <% transports.map(transport => { %>
+    <ul class="collection">
+      <li class="collection-item"><%= transport.transportName %></li>
+    </ul>
+    <% }) %> <%} %>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
+</div>
+
+<div id="modal2" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4>Vehicles :-</h4>
+    <% if (locals.vehicles) { %> <% vehicles.map(vehicle => { %>
+    <ul class="collection">
+      <li class="collection-item"><%= vehicle.name %></li>
+    </ul>
+    <% }) %> <%} %>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
+</div>
 
 <% include includes/footer %>
